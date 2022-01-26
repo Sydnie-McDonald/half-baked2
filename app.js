@@ -66,7 +66,6 @@ catchphraseButton.addEventListener('click', () => {
     catchPhrases.inputValue = ' ';
     // update the dom to show the new catchphrases (refactor to/call displayCatchphrases to do this work)
     displayCatchphrases();
-
 });
 
 function displayStats() {
