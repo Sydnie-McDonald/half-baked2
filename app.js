@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // import functions and grab DOM elements
 import { makeStatsString } from './utils.js';
 const headDropdown = document.getElementById('head-dropdown');
@@ -12,7 +13,7 @@ const reportEl = document.getElementById('report');
 const catchphrasesEl = document.getElementById('catchphrases');
 const catchphraseInput = document.getElementById('catchphrase-input');
 const catchphraseButton = document.getElementById('catchphrase-button');
-const resetcatchPhrase = document.getElementById('reset-catchPhrase');
+const resetPhrase = document.getElementById('reset-catchPhrase');
 
 // set state for how many times the user changes the head, middle, and bottom
 let headCount = 0;
@@ -41,43 +42,51 @@ middleDropdown.addEventListener('change', () => {
     // update the dom for the middle (NOTE: use style.backgroundImage on the middleEl div instead of trying to set the .src -- it's NOT an img tag!)
     middleEl.style.backgroundImage = `url("./assets/${middleValue}-middle.png")`;
     // update the stats to show the new count (refactor to/call displayStats() to do this work)
+    displayStats();
 });
 
 
 bottomDropdown.addEventListener('change', () => {
     // get the value of the bottom dropdown
-    let bottomValue = document.getElementById('bottom-dropdown').value;
+    let bottomValue = bottomDropdown.value;
     // increment the bottom change count state
     bottomCount++;
     // update the dom for the bottom (NOTE use style.backgroundImage on the bottomEl div instead of trying to set the .src -- it's NOT an img tag!)
     bottomEl.style.backgroundImage = `url("./assets/${bottomValue}-bottom.png")`;
     // update the stats to show the new count (refactor to/call displayStats() to do this work)
+    displayStats();
 });
 
 catchphraseButton.addEventListener('click', () => {
     // get the value of the catchphrase input
-
+    const newPhrase = catchphraseInput.value;
     // push the new catchphrase to the catchphrase array in state
-
+    catchPhrases.push(newPhrase);
     // clear out the form input's value so it's empty to the user
-
+    catchPhrases.inputValue = ' ';
     // update the dom to show the new catchphrases (refactor to/call displayCatchphrases to do this work)
+    displayCatchphrases();
 
 });
 
 function displayStats() {
     // change the text content of the reportEl to tell the user how many times they've changed each piece of the state
-    const statsString = makeStatsString(); // call this function with the correct arguments
+    const statsString = makeStatsString(headCount, middleCount, bottomCount); // call this function with the correct arguments
+    reportEl.textContent = statsString;
 }
 
 function displayCatchphrases() {
     // clear out the DOM for the currently displayed catchphrases
-
+    catchphrasesEl.textContent = ' ';
     // loop through each catchphrase in state
+    for (let catchphrase of catchPhrases) {
+        // create an HTML element with the catchphrase as its text content ??
 
-    // and for each catchphrase
+        // and for each catchphrase
+        catchphrasesEl.classList.add('catchphrase');
+        catchphrasesEl.textContent = catchphrase;
+        // and append that HTML element to the cleared-out DOM
+        chatchphrasesEl.append(newPhrase);
+    }
 
-    // create an HTML element with the catchphrase as its text content
-
-    // and append that HTML element to the cleared-out DOM
 }
