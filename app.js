@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 // import functions and grab DOM elements
 import { makeStatsString } from './utils.js';
 const headDropdown = document.getElementById('head-dropdown');
@@ -13,7 +14,6 @@ const reportEl = document.getElementById('report');
 const catchphrasesEl = document.getElementById('catchphrases');
 const catchphraseInput = document.getElementById('catchphrase-input');
 const catchphraseButton = document.getElementById('catchphrase-button');
-const resetPhrase = document.getElementById('reset-catchPhrase');
 
 // set state for how many times the user changes the head, middle, and bottom
 let headCount = 0;
@@ -36,7 +36,7 @@ headDropdown.addEventListener('change', () => {
 
 middleDropdown.addEventListener('change', () => {
     // get the value of the middle dropdown
-    let middleValue = document.getElementById('middle-dropdown').value;
+    let middleValue = middleDropdown.value;
     // increment the middle change count state
     middleCount++;
     // update the dom for the middle (NOTE: use style.backgroundImage on the middleEl div instead of trying to set the .src -- it's NOT an img tag!)
@@ -52,7 +52,7 @@ bottomDropdown.addEventListener('change', () => {
     // increment the bottom change count state
     bottomCount++;
     // update the dom for the bottom (NOTE use style.backgroundImage on the bottomEl div instead of trying to set the .src -- it's NOT an img tag!)
-    bottomEl.style.backgroundImage = `url("./assets/${bottomValue}-bottom.png")`;
+    bottomEl.style.backgroundImage = `url("./assets/${bottomValue}-pants.png")`;
     // update the stats to show the new count (refactor to/call displayStats() to do this work)
     displayStats();
 });
@@ -71,7 +71,7 @@ catchphraseButton.addEventListener('click', () => {
 
 function displayStats() {
     // change the text content of the reportEl to tell the user how many times they've changed each piece of the state
-    const statsString = makeStatsString(headCount, middleCount, bottomCount); // call this function with the correct arguments
+    const statsString = makeStatsString(headCount, middleCount, bottomCount, reportEl); // call this function with the correct arguments
     reportEl.textContent = statsString;
 }
 
@@ -86,7 +86,7 @@ function displayCatchphrases() {
         catchphrasesEl.classList.add('catchphrase');
         catchphrasesEl.textContent = catchphrase;
         // and append that HTML element to the cleared-out DOM
-        chatchphrasesEl.append(newPhrase);
+        catchphrasesEl.append(catchphrase);
     }
 
 }
