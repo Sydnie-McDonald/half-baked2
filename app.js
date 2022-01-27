@@ -70,7 +70,8 @@ catchphraseButton.addEventListener('click', () => {
 
 function displayStats() {
     // change the text content of the reportEl to tell the user how many times they've changed each piece of the state
-    const statsString = makeStatsString(headCount, middleCount, bottomCount, reportEl); // call this function with the correct arguments
+    const statsString = makeStatsString(headCount, middleCount, bottomCount);
+    // call this function with the correct arguments
     reportEl.textContent = statsString;
 }
 
@@ -80,12 +81,12 @@ function displayCatchphrases() {
     // loop through each catchphrase in state
     for (let catchphrase of catchPhrases) {
         // create an HTML element with the catchphrase as its text content ??
-
+        const phrase = document.createElement('p');
         // and for each catchphrase
-        catchphrasesEl.classList.add('catchphrase');
-        catchphrasesEl.textContent = catchphrase;
+        phrase.classList.add('catchphrase');
+        phrase.textContent = catchphrase;
         // and append that HTML element to the cleared-out DOM
-        catchphrasesEl.append(catchphrase);
+        catchphrasesEl.append(phrase);
     }
 
 }
